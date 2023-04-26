@@ -1,0 +1,99 @@
+service: true-north
+
+custom: ${file(resources/config/custom.yml):custom}
+plugins:
+  - serverless-offline-lambda
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage,'local'}
+  region: us-east-1
+  iamRoleStatements: ${file(resources/config/iamRole.yml):iamRoleStatements}
+  environment: ${file(resources/config/env.yml):environment}
+
+functions:
+  signup:
+    handler: lib/handlers/auth/auth-handler.signUpHandler
+    events:
+      - http:
+          method: post
+          path: signup
+          cors: true
+  login:
+    handler: lib/handlers/auth/auth-handler.loginHandler
+    events:
+      - http:
+          method: post
+          path: login
+          cors: true
+  random-string:
+    handler: lib/handlers/operations/operations-handler.generateRandomStringHandler
+    events:
+      - http:
+          method: post
+          path: v1/random-string
+          cors: true
+  addition:
+    handler: lib/handlers/operations/operations-handler.additionHandler
+    events:
+      - http:
+          method: post
+          path: v1/addition
+          cors: true
+  subtraction:
+    handler: lib/handlers/operations/operations-handler.subtractionHandler
+    events:
+      - http:
+          method: post
+          path: v1/subtraction
+          cors: true
+  multiplication:
+    handler: lib/handlers/operations/operations-handler.multiplicationHandler
+    events:
+      - http:
+          method: post
+          path: v1/multiplication
+          cors: true
+  division:
+    handler: lib/handlers/operations/operations-handler.divisionHandler
+    events:
+      - http:
+          method: post
+          path: v1/division
+          cors: true
+  square-root:
+    handler: lib/handlers/operations/operations-handler.squareRootHandler
+    events:
+      - http:
+          method: post
+          path: v1/square-root
+          cors: true
+  delete-record:
+    handler: lib/handlers/record/record-handler.deleteRecordHandler
+    events:
+      - http:
+          method: delete
+          path: v1/record/{recordId}
+          cors: true
+  get-records:
+    handler: lib/handlers/record/record-handler.getRecordsHandler
+    events:
+      - http:
+          method: get
+          path: v1/records
+          cors: true
+  get-records-query-number:
+    handler: lib/handlers/record/record-handler.getRecordsQueryNumberOfPagesHandler
+    events:
+      - http:
+          method: get
+          path: v1/records-number
+          cors: true
+
+package:
+  excludeDevDependencies: true
+
+
+

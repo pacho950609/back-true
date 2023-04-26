@@ -1,0 +1,7 @@
+custom:
+  DB_KEYS:
+    prod: ${ssm(${self:provider.region}):/aws/reference/secretsmanager/DB}
+  RANDOM:
+    else: ${ssm(${self:provider.region}):/aws/reference/secretsmanager/RANDOM}
+  hashKey:
+    else: password
