@@ -32,7 +32,7 @@ BODY
 }
 ```
 
-Then, use that token to create an operation
+Then, use that token in the Authorization header to create an operation
 
 URL
 ```bash
