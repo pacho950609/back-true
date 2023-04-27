@@ -26,8 +26,8 @@ describe('Addition', () => {
         await Database.resetConnection(connection);
         const { manager } = connection;
         user = new User();
-        user.email = 'test@yopmail.com';
-        user.password = await hash('test');
+        user.email = 'test1@yopmail.com';
+        user.password = await hash('test1');
         await manager.save(user);
 
         operation = new Operation();
@@ -36,7 +36,7 @@ describe('Addition', () => {
         operation = await manager.save(operation);
     });
 
-    test('Enough balance', async () => {
+    test('Addition Enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -54,7 +54,7 @@ describe('Addition', () => {
         expect(res.record.operationId).toBe(operation.id);
         expect(res.record.userBalance).toBe(150);
     });
-    test('Not enough balance', async () => {
+    test('Addition Not enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -76,8 +76,8 @@ describe('Subtraction', () => {
         await Database.resetConnection(connection);
         const { manager } = connection;
         user = new User();
-        user.email = 'test@yopmail.com';
-        user.password = await hash('test');
+        user.email = 'test2@yopmail.com';
+        user.password = await hash('test2');
         await manager.save(user);
 
         operation = new Operation();
@@ -86,7 +86,7 @@ describe('Subtraction', () => {
         operation = await manager.save(operation);
     });
 
-    test('Enough balance', async () => {
+    test('Subtraction Enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -104,7 +104,7 @@ describe('Subtraction', () => {
         expect(res.record.operationId).toBe(operation.id);
         expect(res.record.userBalance).toBe(150);
     });
-    test('Not enough balance', async () => {
+    test('Subtraction Not enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -126,8 +126,8 @@ describe('Multiplication', () => {
         await Database.resetConnection(connection);
         const { manager } = connection;
         user = new User();
-        user.email = 'test@yopmail.com';
-        user.password = await hash('test');
+        user.email = 'test3@yopmail.com';
+        user.password = await hash('test3');
         await manager.save(user);
 
         operation = new Operation();
@@ -136,7 +136,7 @@ describe('Multiplication', () => {
         operation = await manager.save(operation);
     });
 
-    test('Enough balance', async () => {
+    test('Multiplication Enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -154,7 +154,7 @@ describe('Multiplication', () => {
         expect(res.record.operationId).toBe(operation.id);
         expect(res.record.userBalance).toBe(150);
     });
-    test('Not enough balance', async () => {
+    test('Multiplication Not enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -176,8 +176,8 @@ describe('Division', () => {
         await Database.resetConnection(connection);
         const { manager } = connection;
         user = new User();
-        user.email = 'test@yopmail.com';
-        user.password = await hash('test');
+        user.email = 'test4@yopmail.com';
+        user.password = await hash('test4');
         await manager.save(user);
 
         operation = new Operation();
@@ -186,7 +186,7 @@ describe('Division', () => {
         operation = await manager.save(operation);
     });
 
-    test('Enough balance', async () => {
+    test('Division Enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
@@ -204,7 +204,7 @@ describe('Division', () => {
         expect(res.record.operationId).toBe(operation.id);
         expect(res.record.userBalance).toBe(150);
     });
-    test('Not enough balance', async () => {
+    test('Division Not enough balance', async () => {
         const { manager } = connection;
         await manager.save(
             new Record({
