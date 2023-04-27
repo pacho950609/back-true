@@ -36,7 +36,7 @@ Then, use that token in the Authorization header to create an operation
 
 URL
 ```bash
-localhost:3000//v1/addition
+localhost:3000/v1/addition
 ```
 BODY
 ```bash
@@ -46,7 +46,7 @@ BODY
 }
 ```
 
-Finally, search for client records
+Finally, search the client records
 
 URL
 ```bash
