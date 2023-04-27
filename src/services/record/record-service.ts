@@ -123,7 +123,7 @@ export const getUserRecords = async (userId: string, filters: RecordFilters, man
     }
 
     query.limit(recordsPerPage);
-    query.skip(recordsPerPage * (page - 1));
+    query.offset(recordsPerPage * (page - 1));
 
     if (orderBy?.column) {
         query.orderBy(
@@ -136,7 +136,7 @@ export const getUserRecords = async (userId: string, filters: RecordFilters, man
 
     return records.map((r) => ({
         id: r.id,
-        operation: r.operation.type,
+        type: r.operation.type,
         userBalance: r.userBalance,
         operationResponse: r.operationResponse,
         amount: r.amount,

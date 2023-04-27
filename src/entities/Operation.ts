@@ -19,7 +19,7 @@ export class Operation {
     id: string;
 
     @Index()
-    @Column({ type: 'enum', enum: OperationType, unique: true })
+    @Column({ type: 'varchar', unique: true })
     type: OperationType;
 
     @Column()

@@ -18,6 +18,7 @@ export class Record {
     @Column()
     operationId: string;
 
+    @Index()
     @Column()
     userId: string;
 
@@ -27,7 +28,7 @@ export class Record {
     @Column({ type: 'real' })
     userBalance: number;
 
-    @Column({ type: 'enum', enum: OperationResponse })
+    @Column({ type: 'varchar' })
     operationResponse: OperationResponse;
 
     /** Goal  */
