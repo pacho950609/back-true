@@ -7,14 +7,15 @@ const getConfig = (name: string): PostgresConnectionOptions => {
         type: 'postgres',
         host: process.env.DB_URL,
         port: 5432,
-        synchronize: true,
-        migrationsRun: false,
+        synchronize: false,
+        migrationsRun: true,
         namingStrategy: new SnakeNamingStrategy(),
         logging: false,
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: name,
         entities: ['lib/entities/*.js'],
+        migrations: ['lib/migrations/*.js'],
     };
 };
 export default getConfig;
