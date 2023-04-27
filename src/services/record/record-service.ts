@@ -28,12 +28,12 @@ export const createRecord = async (userId: string, type: OperationType, manager:
                 'last_date_query.user_id = r.user_id and last_date_query.last_date = r.date',
             )
             .getOne();
-        
+
         const partialRecord = {
             operationId: operationEntity.id,
             userId,
             amount: operationEntity.cost,
-        }
+        };
 
         if (lastRecord && lastRecord.userBalance >= operationEntity.cost) {
             // Enough balance case

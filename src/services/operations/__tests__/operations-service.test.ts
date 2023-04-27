@@ -28,24 +28,26 @@ describe('Addition', () => {
         user = new User();
         user.email = 'test@yopmail.com';
         user.password = await hash('test');
-        await manager.save(user)
+        await manager.save(user);
 
         operation = new Operation();
         operation.type = OperationType.ADDITION;
         operation.cost = 100;
-        operation = await manager.save(operation)
+        operation = await manager.save(operation);
     });
 
     test('Enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 250
-        }));
-        const res = await addition(user.id, 1, 2 ,manager);
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 250,
+            }),
+        );
+        const res = await addition(user.id, 1, 2, manager);
 
         expect(res.operationRes).toBe(3);
         expect(res.record.amount).toBe(100);
@@ -54,14 +56,16 @@ describe('Addition', () => {
     });
     test('Not enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 50
-        }));
-        await expect(addition(user.id, 1, 2 ,manager)).rejects.toThrow();
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 50,
+            }),
+        );
+        await expect(addition(user.id, 1, 2, manager)).rejects.toThrow();
     });
 });
 
@@ -74,24 +78,26 @@ describe('Subtraction', () => {
         user = new User();
         user.email = 'test@yopmail.com';
         user.password = await hash('test');
-        await manager.save(user)
+        await manager.save(user);
 
         operation = new Operation();
         operation.type = OperationType.SUBTRACTION;
         operation.cost = 100;
-        operation = await manager.save(operation)
+        operation = await manager.save(operation);
     });
 
     test('Enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 250
-        }));
-        const res = await subtraction(user.id, 2, 1,manager);
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 250,
+            }),
+        );
+        const res = await subtraction(user.id, 2, 1, manager);
 
         expect(res.operationRes).toBe(1);
         expect(res.record.amount).toBe(100);
@@ -100,14 +106,16 @@ describe('Subtraction', () => {
     });
     test('Not enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 50
-        }));
-        await expect(subtraction(user.id, 1, 2 ,manager)).rejects.toThrow();
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 50,
+            }),
+        );
+        await expect(subtraction(user.id, 1, 2, manager)).rejects.toThrow();
     });
 });
 
@@ -120,24 +128,26 @@ describe('Multiplication', () => {
         user = new User();
         user.email = 'test@yopmail.com';
         user.password = await hash('test');
-        await manager.save(user)
+        await manager.save(user);
 
         operation = new Operation();
         operation.type = OperationType.MULTIPLICATION;
         operation.cost = 100;
-        operation = await manager.save(operation)
+        operation = await manager.save(operation);
     });
 
     test('Enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 250
-        }));
-        const res = await multiplication(user.id, 2, 3,manager);
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 250,
+            }),
+        );
+        const res = await multiplication(user.id, 2, 3, manager);
 
         expect(res.operationRes).toBe(6);
         expect(res.record.amount).toBe(100);
@@ -146,14 +156,16 @@ describe('Multiplication', () => {
     });
     test('Not enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 50
-        }));
-        await expect(multiplication(user.id, 1, 2 ,manager)).rejects.toThrow();
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 50,
+            }),
+        );
+        await expect(multiplication(user.id, 1, 2, manager)).rejects.toThrow();
     });
 });
 
@@ -166,24 +178,26 @@ describe('Division', () => {
         user = new User();
         user.email = 'test@yopmail.com';
         user.password = await hash('test');
-        await manager.save(user)
+        await manager.save(user);
 
         operation = new Operation();
         operation.type = OperationType.DIVISION;
         operation.cost = 100;
-        operation = await manager.save(operation)
+        operation = await manager.save(operation);
     });
 
     test('Enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 250
-        }));
-        const res = await division(user.id, 6, 2,manager);
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 250,
+            }),
+        );
+        const res = await division(user.id, 6, 2, manager);
 
         expect(res.operationRes).toBe(3);
         expect(res.record.amount).toBe(100);
@@ -192,13 +206,15 @@ describe('Division', () => {
     });
     test('Not enough balance', async () => {
         const { manager } = connection;
-        await manager.save(new Record({
-            amount: 100,
-            operationId: operation.id,
-            userId: user.id,
-            operationResponse: OperationResponse.OK,
-            userBalance: 50
-        }));
-        await expect(division(user.id, 1, 2 ,manager)).rejects.toThrow();
+        await manager.save(
+            new Record({
+                amount: 100,
+                operationId: operation.id,
+                userId: user.id,
+                operationResponse: OperationResponse.OK,
+                userBalance: 50,
+            }),
+        );
+        await expect(division(user.id, 1, 2, manager)).rejects.toThrow();
     });
 });

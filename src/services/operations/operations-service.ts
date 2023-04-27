@@ -10,15 +10,10 @@ import { OperationType } from '../../entities/Operation';
  * @param manager db connection
  * @returns
  */
-export const addition = async (
-    userId: string,
-    number1: number,
-    number2: number,
-    manager: EntityManager,
-) => {
+export const addition = async (userId: string, number1: number, number2: number, manager: EntityManager) => {
     const operationRes = number1 + number2;
     const record = await createRecord(userId, OperationType.ADDITION, manager);
-    return {operationRes, record};
+    return { operationRes, record };
 };
 
 /**
@@ -29,15 +24,10 @@ export const addition = async (
  * @param manager db connection
  * @returns
  */
-export const subtraction = async (
-    userId: string,
-    number1: number,
-    number2: number,
-    manager: EntityManager,
-) => {
+export const subtraction = async (userId: string, number1: number, number2: number, manager: EntityManager) => {
     const operationRes = number1 - number2;
-    const record =await createRecord(userId, OperationType.SUBTRACTION, manager);
-    return {operationRes, record};
+    const record = await createRecord(userId, OperationType.SUBTRACTION, manager);
+    return { operationRes, record };
 };
 
 /**
@@ -48,15 +38,10 @@ export const subtraction = async (
  * @param manager db connection
  * @returns
  */
-export const multiplication = async (
-    userId: string,
-    number1: number,
-    number2: number,
-    manager: EntityManager,
-) => {
+export const multiplication = async (userId: string, number1: number, number2: number, manager: EntityManager) => {
     const operationRes = number1 * number2;
     const record = await createRecord(userId, OperationType.MULTIPLICATION, manager);
-    return {operationRes, record};
+    return { operationRes, record };
 };
 
 /**
@@ -67,15 +52,10 @@ export const multiplication = async (
  * @param manager db connection
  * @returns
  */
-export const division = async (
-    userId: string,
-    number1: number,
-    number2: number,
-    manager: EntityManager,
-) => {
+export const division = async (userId: string, number1: number, number2: number, manager: EntityManager) => {
     const operationRes = number1 / number2;
     const record = await createRecord(userId, OperationType.DIVISION, manager);
-    return {operationRes, record};
+    return { operationRes, record };
 };
 
 /**
@@ -88,5 +68,5 @@ export const division = async (
 export const squareRoot = async (userId: string, number1: number, manager: EntityManager) => {
     const operationRes = Math.sqrt(number1);
     const record = await createRecord(userId, OperationType.SQUARE_ROOT, manager);
-    return {operationRes, record};
+    return { operationRes, record };
 };
