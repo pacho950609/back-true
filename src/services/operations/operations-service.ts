@@ -1,31 +1,6 @@
 import { EntityManager } from 'typeorm';
 import { createRecord } from 'services/record/record-service';
-import { generateRandomStringRequest } from '../../integrations/random';
-import { OperationResponse, Record } from '../../entities/Record';
-import { Operation, OperationType } from '../../entities/Operation';
-
-/**
- * Generate a random string
- * @param userId userId
- * @param manager db connection
- * @returns
- */
-export const generateRandomString = async (userId: string, manager: EntityManager): Promise<string> => {
-    const res = await generateRandomStringRequest(1);
-    const randomString = res.result?.random?.data?.[0];
-    const generateStringOperation = await manager.findOne(Operation, { where: { type: OperationType.RANDOM_STRING } });
-    if (randomString) {
-        const record = new Record({
-            operationId: generateStringOperation.id,
-            userId,
-            amount: 13,
-            userBalance: 123123,
-            operationResponse: OperationResponse.OK,
-        });
-        await manager.save(record);
-    }
-    return randomString;
-};
+import { OperationType } from '../../entities/Operation';
 
 /**
  * Execute an addition operation

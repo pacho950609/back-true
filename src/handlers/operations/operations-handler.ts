@@ -2,12 +2,12 @@ import J from 'joi';
 import {
     addition,
     division,
-    generateRandomString,
     multiplication,
     squareRoot,
     subtraction,
 } from '../../services/operations/operations-service';
 import { handlerWrapper } from '../../utils/wrapper';
+import { generateRandomString } from 'services/random/random-service';
 
 /**
  * Generate a random string handler
@@ -19,7 +19,7 @@ export const generateRandomStringHandler = handlerWrapper(
     },
     async (event, manager) => {
         const response = await generateRandomString(event.userId, manager);
-        return { response };
+        return response;
     },
 );
 
@@ -38,7 +38,7 @@ export const additionHandler = handlerWrapper(
     async (event, manager) => {
         const { number1, number2 } = event.body;
         const response = await addition(event.userId, number1, number2, manager);
-        return { response };
+        return response;
     },
 );
 
@@ -57,7 +57,7 @@ export const subtractionHandler = handlerWrapper(
     async (event, manager) => {
         const { number1, number2 } = event.body;
         const response = await subtraction(event.userId, number1, number2, manager);
-        return { response };
+        return response;
     },
 );
 
@@ -76,7 +76,7 @@ export const multiplicationHandler = handlerWrapper(
     async (event, manager) => {
         const { number1, number2 } = event.body;
         const response = await multiplication(event.userId, number1, number2, manager);
-        return { response };
+        return response;
     },
 );
 
@@ -95,7 +95,7 @@ export const divisionHandler = handlerWrapper(
     async (event, manager) => {
         const { number1, number2 } = event.body;
         const response = await division(event.userId, number1, number2, manager);
-        return { response };
+        return response;
     },
 );
 
@@ -113,6 +113,6 @@ export const squareRootHandler = handlerWrapper(
     async (event, manager) => {
         const { number1 } = event.body;
         const response = await squareRoot(event.userId, number1, manager);
-        return { response };
+        return response;
     },
 );
