@@ -182,3 +182,27 @@ export const getQueryNumberOfPages = async (
         records,
     };
 };
+
+/**
+ * Get user balance
+ * @param userId User id
+ * @param manager Db connection
+ */
+export const getBalance = async (userId: string, manager: EntityManager) => {
+    const lastRecord = await manager
+    .createQueryBuilder(Record, 'r')
+    .innerJoin(
+        (sq) => {
+            return sq
+                .select(['user_id', 'max(date) last_date'])
+                .from(Record, 'r2')
+                .where('user_id = :userId', { userId })
+                .groupBy('user_id');
+        },
+        'last_date_query',
+        'last_date_query.user_id = r.user_id and last_date_query.last_date = r.date',
+    )
+    .getOne();
+
+    return lastRecord?.userBalance ?? 10000;
+};

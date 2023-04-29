@@ -6,6 +6,7 @@ import {
     multiplication,
     squareRoot,
     subtraction,
+    getOperations,
 } from '../../services/operations/operations-service';
 import { handlerWrapper } from '../../utils/wrapper';
 
@@ -108,5 +109,19 @@ export const squareRootHandler = handlerWrapper(
     async (event, manager) => {
         const { number1 } = event.body;
         return await squareRoot(event.userId, number1, manager);
+    },
+);
+
+
+/**
+ * Get operations handler
+ */
+export const getOperationsHandler = handlerWrapper(
+    {
+        cors: true,
+    },
+    async (event, manager) => {
+        const operations = await getOperations(manager);
+        return { operations }
     },
 );

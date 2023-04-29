@@ -1,6 +1,6 @@
 import { EntityManager } from 'typeorm';
 import { createRecord } from 'services/record/record-service';
-import { OperationType } from '../../entities/Operation';
+import { OperationType, Operation } from '../../entities/Operation';
 
 /**
  * Execute an addition operation
@@ -70,3 +70,13 @@ export const squareRoot = async (userId: string, number1: number, manager: Entit
     const record = await createRecord(userId, OperationType.SQUARE_ROOT, manager);
     return { operationRes, record };
 };
+
+/**
+ * Get operations
+ * @param manager Db connection
+ */
+export const getOperations = async (manager: EntityManager) => {
+    const operations = await manager.find(Operation);
+    return operations.map( o => ({ type: o.type, cost: o.cost }));
+};
+

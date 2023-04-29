@@ -91,6 +91,20 @@ functions:
           method: get
           path: v1/records-number
           cors: true
+  get-balance:
+    handler: lib/handlers/record/record-handler.getBalanceHandler
+    events:
+      - http:
+          method: get
+          path: v1/balance
+          cors: true
+  get-operations:
+    handler: lib/handlers/operations/operations-handler.getOperationsHandler
+    events:
+      - http:
+          method: get
+          path: v1/operations
+          cors: true
 
 package:
   excludeDevDependencies: true
