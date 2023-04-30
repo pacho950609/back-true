@@ -176,9 +176,10 @@ export const getQueryNumberOfPages = async (
 
     const count = await query.getCount();
     const records = await getUserRecords(userId, { ...filters, page: 1 }, manager);
+    const pages = Math.ceil(count / recordsPerPage);
 
     return {
-        pages: Math.ceil(count / recordsPerPage),
+        pages: pages > 0 ? pages : 1,
         records,
     };
 };
