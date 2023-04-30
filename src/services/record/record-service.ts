@@ -4,6 +4,28 @@ import { StatusCodeError } from 'utils/error';
 import { Record, OperationResponse } from '../../entities/Record';
 
 /**
+ * Get user last record
+ * @param userId
+ * @param manager
+ */
+const getLastUserRecord = async (userId: string, manager: EntityManager) => {
+    return await manager
+        .createQueryBuilder(Record, 'r')
+        .innerJoin(
+            (sq) => {
+                return sq
+                    .select(['user_id', 'max(date) last_date'])
+                    .from(Record, 'r2')
+                    .where('user_id = :userId', { userId })
+                    .groupBy('user_id');
+            },
+            'last_date_query',
+            'last_date_query.user_id = r.user_id and last_date_query.last_date = r.date',
+        )
+        .getOne();
+};
+
+/**
  * Create a new record using a transaction to prevent dirty reads
  * @param userId User id
  * @param type Type id
@@ -14,20 +36,7 @@ export const createRecord = async (userId: string, type: OperationType, manager:
 
     await manager.transaction(async (tManager) => {
         const operationEntity = await tManager.findOne(Operation, { where: { type } });
-        const lastRecord = await tManager
-            .createQueryBuilder(Record, 'r')
-            .innerJoin(
-                (sq) => {
-                    return sq
-                        .select(['user_id', 'max(date) last_date'])
-                        .from(Record, 'r2')
-                        .where('user_id = :userId', { userId })
-                        .groupBy('user_id');
-                },
-                'last_date_query',
-                'last_date_query.user_id = r.user_id and last_date_query.last_date = r.date',
-            )
-            .getOne();
+        const lastRecord = await getLastUserRecord(userId, tManager);
 
         const partialRecord = {
             operationId: operationEntity.id,
@@ -190,20 +199,6 @@ export const getQueryNumberOfPages = async (
  * @param manager Db connection
  */
 export const getBalance = async (userId: string, manager: EntityManager) => {
-    const lastRecord = await manager
-    .createQueryBuilder(Record, 'r')
-    .innerJoin(
-        (sq) => {
-            return sq
-                .select(['user_id', 'max(date) last_date'])
-                .from(Record, 'r2')
-                .where('user_id = :userId', { userId })
-                .groupBy('user_id');
-        },
-        'last_date_query',
-        'last_date_query.user_id = r.user_id and last_date_query.last_date = r.date',
-    )
-    .getOne();
-
+    const lastRecord = await getLastUserRecord(userId, manager);
     return lastRecord?.userBalance ?? 10000;
 };

@@ -1,6 +1,12 @@
 import J from 'joi';
 import { handlerWrapper } from 'utils/wrapper';
-import { deleteRecord, getUserRecords, RecordFilters, getQueryNumberOfPages, getBalance } from 'services/record/record-service';
+import {
+    deleteRecord,
+    getUserRecords,
+    RecordFilters,
+    getQueryNumberOfPages,
+    getBalance,
+} from 'services/record/record-service';
 import { OperationType } from 'entities/Operation';
 import { OperationResponse } from 'entities/Record';
 
@@ -108,7 +114,6 @@ export const getRecordsQueryNumberOfPagesHandler = handlerWrapper(
     },
 );
 
-
 /**
  * Balance handler
  */
@@ -119,6 +124,6 @@ export const getBalanceHandler = handlerWrapper(
     },
     async (event, manager) => {
         const balance = await getBalance(event.userId, manager);
-        return { balance }
+        return { balance };
     },
 );

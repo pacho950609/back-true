@@ -66,7 +66,7 @@ export const handlerWrapper = (
     handlerEvent.queryStringParameters = event.queryStringParameters;
 
     if (event.body) {
-        handlerEvent.body = event.body? JSON.parse(event.body) : {};
+        handlerEvent.body = event.body ? JSON.parse(event.body) : {};
         if (optionsParam.validateBody) {
             const { error } = optionsParam.validateBody.validate(handlerEvent.body);
             if (error) {

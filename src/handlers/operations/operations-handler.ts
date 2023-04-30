@@ -112,7 +112,6 @@ export const squareRootHandler = handlerWrapper(
     },
 );
 
-
 /**
  * Get operations handler
  */
@@ -122,6 +121,6 @@ export const getOperationsHandler = handlerWrapper(
     },
     async (event, manager) => {
         const operations = await getOperations(manager);
-        return { operations }
+        return { operations };
     },
 );

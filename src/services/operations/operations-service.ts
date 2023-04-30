@@ -77,6 +77,5 @@ export const squareRoot = async (userId: string, number1: number, manager: Entit
  */
 export const getOperations = async (manager: EntityManager) => {
     const operations = await manager.find(Operation);
-    return operations.map( o => ({ type: o.type, cost: o.cost }));
+    return operations.map((o) => ({ type: o.type, cost: o.cost }));
 };
-
