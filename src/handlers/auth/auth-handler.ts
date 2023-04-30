@@ -3,7 +3,23 @@ import { handlerWrapper } from 'utils/wrapper';
 import { signUp, login } from '../../services/auth/auth-service';
 
 /**
- * Create a new users
+ * @api {post} /signup Create user
+ * @apiDescription Create a new user and return a token
+ * @apiName signUpHandler
+ * @apiGroup Auth
+ * @apiHeader {String} Authorization User token
+ * @apiBody {String} email User email 
+ * @apiBody {String} password User password.
+ * @apiParamExample {json} Body-Example:
+ *  {
+        email: "test@gmail.com",
+        password: "test123"
+ *  } 
+ * @apiPermission Client
+ * @apiSuccessExample Success-Response:
+ * {
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+ * }  
  */
 export const signUpHandler = handlerWrapper(
     {
@@ -21,7 +37,23 @@ export const signUpHandler = handlerWrapper(
 );
 
 /**
- * Validate user credentials and return a token
+ * @api {post} /login Login
+ * @apiDescription Validate user credentials and return a token
+ * @apiName loginHandler
+ * @apiGroup Auth
+ * @apiHeader {String} Authorization User token
+ * @apiPermission Client
+ * @apiBody {String} email User email 
+ * @apiBody {String} password User password.
+ * @apiParamExample {json} Body-Example:
+ *  {
+        email: "test@gmail.com",
+        password: "test123"
+ *  } 
+ * @apiSuccessExample Success-Response:
+ * {
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+ * }  
  */
 export const loginHandler = handlerWrapper(
     {

@@ -11,7 +11,16 @@ import { OperationType } from 'entities/Operation';
 import { OperationResponse } from 'entities/Record';
 
 /**
- * Delete record handler
+ * @api {delete} /v1/record/:recordId Delete record
+ * @apiDescription Delete a record
+ * @apiName deleteRecordHandler
+ * @apiGroup Records
+ * @apiHeader {String} Authorization User token
+ * @apiPermission Client
+ * @apiSuccessExample Success-Response:
+ * {
+        "response": "ok"
+ * }
  */
 export const deleteRecordHandler = handlerWrapper(
     {
@@ -28,7 +37,40 @@ export const deleteRecordHandler = handlerWrapper(
 );
 
 /**
- * Get user records handler
+ * @api {get} /v1/records?recordsPerPage=2&page=1 Get records
+ * @apiDescription Get a specific user page of records
+ * @apiName getRecordsHandler
+ * @apiGroup Records
+ * @apiHeader {String} Authorization User token
+ * @apiPermission Client
+ * @apiQuery {Number} recordsPerPage Number of records per page.
+ * @apiQuery {Number} page Page number.
+ * @apiQuery {Date} [date] Date filter (ISO format).
+ * @apiQuery {String="addition","subtraction","multiplication","division","randomString","squareRoot"} [type] Operation type filter.
+ * @apiQuery {String="OK","ERROR"} [operationResponse] Operation response filter.
+ * @apiQuery {String="date","type","operationResponse"} [orderByCol] Column to order.
+ * @apiQuery {String="ASC","DESC"} [orderByType] How to order the column.
+ * @apiSuccessExample Success-Response:
+ * {
+        "records": [
+            {
+                "id": "9b84779c-3ef6-49d6-ae82-8b4971eb1731",
+                "type": "randomString",
+                "userBalance": 2300,
+                "operationResponse": "OK",
+                "amount": 1500,
+                "date": "2023-04-30T22:35:44.572Z"
+            },
+            {
+                "id": "847d4ca2-221e-4052-be4e-c33ee815c295",
+                "type": "addition",
+                "userBalance": 1300,
+                "operationResponse": "OK",
+                "amount": 1000,
+                "date": "2023-04-30T22:38:48.360Z"
+            }
+        ]
+ * }
  */
 export const getRecordsHandler = handlerWrapper(
     {
@@ -77,7 +119,40 @@ export const getRecordsHandler = handlerWrapper(
 );
 
 /**
- * Get query number of pages handler
+ * @api {get} /v1/records-number?recordsPerPage=2 Get pages and records
+ * @apiDescription Get user number of pages and return first page of records
+ * @apiName getRecordsQueryNumberOfPagesHandler
+ * @apiGroup Records
+ * @apiHeader {String} Authorization User token
+ * @apiPermission Client
+ * @apiQuery {Number} recordsPerPage Number of records per page.
+ * @apiQuery {Date} [date] Date filter (ISO format).
+ * @apiQuery {String="addition","subtraction","multiplication","division","randomString","squareRoot"} [type] Operation type filter.
+ * @apiQuery {String="OK","ERROR"} [operationResponse] Operation response filter.
+ * @apiQuery {String="date","type","operationResponse"} [orderByCol] Column to order.
+ * @apiQuery {String="ASC","DESC"} [orderByType] How to order the column.
+ * @apiSuccessExample Success-Response:
+ * {
+        "pages": 2,
+        "records": [
+            {
+                "id": "9b84779c-3ef6-49d6-ae82-8b4971eb1731",
+                "type": "randomString",
+                "userBalance": 2300,
+                "operationResponse": "OK",
+                "amount": 1500,
+                "date": "2023-04-30T22:35:44.572Z"
+            },
+            {
+                "id": "847d4ca2-221e-4052-be4e-c33ee815c295",
+                "type": "addition",
+                "userBalance": 1300,
+                "operationResponse": "OK",
+                "amount": 1000,
+                "date": "2023-04-30T22:38:48.360Z"
+            }
+        ]
+ * }
  */
 export const getRecordsQueryNumberOfPagesHandler = handlerWrapper(
     {
@@ -115,7 +190,16 @@ export const getRecordsQueryNumberOfPagesHandler = handlerWrapper(
 );
 
 /**
- * Balance handler
+ * @api {get} /v1/balance Get balance
+ * @apiDescription Get user balance
+ * @apiName getBalanceHandler
+ * @apiGroup Records
+ * @apiHeader {String} Authorization User token
+ * @apiPermission Client
+ * @apiSuccessExample Success-Response:
+ * {
+        "balance": 200,
+ * }
  */
 export const getBalanceHandler = handlerWrapper(
     {

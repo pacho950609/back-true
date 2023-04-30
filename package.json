@@ -9,7 +9,8 @@
     "test": "npm run build && source ./.test.env && jest --detectOpenHandles --coverage --setupFiles dotenv/config --runInBand --forceExit --verbose false  --testRegex '(/(__tests__|__test__|test|tests)/.*.test.js)$'",
     "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --copy-files --source-maps inline",
     "lint": "eslint 'src/**' --ext ts --fix --quiet",
-    "deploy": "npm run build && sls deploy --stage prod"
+    "deploy": "npm run build && sls deploy --stage prod",
+    "create-doc": "npx apidoc -i ./src -o ./public -d -q"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.2",
