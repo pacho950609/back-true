@@ -53,6 +53,10 @@ URL
 localhost:3000/v1/records-number?recordsPerPage=6&orderByCol=type
 ```
 
+## EP's Documentation
+
+For further information use [documentation page] (http://true-docs.s3-website-us-east-1.amazonaws.com/)
+
 ## Test
 
 To run test you only have to run the following command
